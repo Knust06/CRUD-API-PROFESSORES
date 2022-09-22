@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6CCC4D7328DCF03900945D39 /* AddProfessoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCC4D7228DCF03900945D39 /* AddProfessoresView.swift */; };
+		6CCC4D7528DCF5EC00945D39 /* EditProfessoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCC4D7428DCF5EC00945D39 /* EditProfessoresView.swift */; };
 		6CF3F30028DB821200308DCB /* ProfessoresCRUDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF3F2FF28DB821200308DCB /* ProfessoresCRUDApp.swift */; };
 		6CF3F30228DB821200308DCB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF3F30128DB821200308DCB /* ContentView.swift */; };
 		6CF3F30428DB821300308DCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CF3F30328DB821300308DCB /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6CCC4D7228DCF03900945D39 /* AddProfessoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfessoresView.swift; sourceTree = "<group>"; };
+		6CCC4D7428DCF5EC00945D39 /* EditProfessoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfessoresView.swift; sourceTree = "<group>"; };
 		6CF3F2FC28DB821200308DCB /* ProfessoresCRUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProfessoresCRUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF3F2FF28DB821200308DCB /* ProfessoresCRUDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessoresCRUDApp.swift; sourceTree = "<group>"; };
 		6CF3F30128DB821200308DCB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 		6CF3F2FE28DB821200308DCB /* ProfessoresCRUD */ = {
 			isa = PBXGroup;
 			children = (
+				6CCC4D7428DCF5EC00945D39 /* EditProfessoresView.swift */,
+				6CCC4D7228DCF03900945D39 /* AddProfessoresView.swift */,
 				6CF3F30D28DB852000308DCB /* DataModel */,
 				6CF3F2FF28DB821200308DCB /* ProfessoresCRUDApp.swift */,
 				6CF3F30128DB821200308DCB /* ContentView.swift */,
@@ -151,8 +157,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CCC4D7528DCF5EC00945D39 /* EditProfessoresView.swift in Sources */,
 				6CF3F30F28DB85A200308DCB /* ProfessorModel.swift in Sources */,
 				6CF3F30228DB821200308DCB /* ContentView.swift in Sources */,
+				6CCC4D7328DCF03900945D39 /* AddProfessoresView.swift in Sources */,
 				6CF3F31128DB86E600308DCB /* ViewModel.swift in Sources */,
 				6CF3F30028DB821200308DCB /* ProfessoresCRUDApp.swift in Sources */,
 			);

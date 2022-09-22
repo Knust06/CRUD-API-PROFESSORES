@@ -1,10 +1,3 @@
-//
-//  ViewModel.swift
-//  ProfessoresCRUD
-//
-//  Created by user226741 on 9/21/22.
-//
-
 import Foundation
 
 /**
@@ -13,15 +6,24 @@ import Foundation
  
         Serializar é o ato de transformar um objeto em binário (0 e 1) -> Codable
             Deserializar é o ato de pegar um binário e transfomar em um objeto -> Decodable
+ 
+ ObservableObject: o mesmo notifica o SwiftUI quando houver alguma alteração nos objetos da ViewModel
  */
-class ViewModel {
+class ViewModel : ObservableObject {
     
     let urlAddr : String = "https://cors.grandeporte.com.br/cursos.grandeporte.com.br:8080/professores"
     
-    var items : [ProfessorModel] = []
+    // @Published serve para notificar a tela (swift ui) quando esta variável for modificada
+    @Published var items : [ProfessorModel] = []
+    
+    // fazer um construtor para quando instanciarmos um objeto do tipo View Model,
+    // a variável items será carregada com os professores vindo da API
+    init(){
+        fetchProfessores()
+    }
     
     /**
-     Fetch é pegar todos os dados da API
+                Fetch é pegar todos os dados da API
      */
     func fetchProfessores(){
         
@@ -31,12 +33,12 @@ class ViewModel {
         }
         
         /**
-         dataTask é para criar uma tarefa de forma assíncrona para que o usuário
-         possa fazer outras coisas em paralelo sem precisar ficar esperando
-         a resposta da requisição
+            dataTask é para criar uma tarefa de forma assíncrona para que o usuário
+                    possa fazer outras coisas em paralelo sem precisar ficar esperando
+                            a resposta da requisição
          
-         O shared é uma variável que está dentro da classe URLSession e serve para compartilhar/executar tasks
-         na aplicação para criar as requisições feitas pelo APP de forma assíncrona
+                O shared é uma variável que está dentro da classe URLSession e serve para compartilhar/executar tasks
+                    na aplicação para criar as requisições feitas pelo APP de forma assíncrona
          */
         URLSession.shared.dataTask(with: url){ (data, res, error) in
             
@@ -50,10 +52,11 @@ class ViewModel {
                     let result = try JSONDecoder().decode([ProfessorModel].self, from: data)
                     
                     self.items = result
+                    print(" Count \(self.items.count) ")
                 }
             }// do
             catch {
-                print("fetch error")
+                print("fetch error \(error)")
             } // catch
             
         }.resume()
@@ -61,7 +64,7 @@ class ViewModel {
     }
     
     func createProfessor(nome: String, email: String){
-        //URL é opcional por isso o uso do guard let
+        
         guard let url = URL(string: urlAddr) else {
             print("URL NOT FOUND")
             return
@@ -95,6 +98,9 @@ class ViewModel {
                 // pegando a resposta da API
                 if let data = data{
                     let result = try JSONDecoder().decode(ProfessorModel.self, from: data)
+                    
+//                    print("CREATE : \(result.id)")
+                    self.fetchProfessores()
                 }
             }//do
             catch {
@@ -119,7 +125,7 @@ class ViewModel {
         
         
         let professor : ProfessorModel = ProfessorModel(id:id, nome:nome, email:email)
-        
+        // ENCODER tranforma um objeto swift em um JSON que será enviado para a API
         do{
             // serializando para enviar para a API
             request.httpBody = try JSONEncoder().encode(professor)
@@ -140,7 +146,10 @@ class ViewModel {
             do{
                 // pegando a resposta da API
                 if let data = data{
+                    // DECODER tranforma um JSON (em geral vem da API) para um objeto swift
                     let result = try JSONDecoder().decode(ProfessorModel.self, from: data)
+                    
+                    print("UPDATE : \(result.id)")
                 }
             }//do
             catch {
@@ -152,7 +161,7 @@ class ViewModel {
         
     }
     
-    func deleteProfessores(id : Int){ // nao precisa do encoder pois não envia nada do body
+    func deleteProfessores(id : Int){
         
         guard let url = URL(string: "\(urlAddr)/\(id)") else {
             print("URL NOT FOUND")
@@ -170,14 +179,18 @@ class ViewModel {
                 return
             }// if
             
+            self.fetchProfessores()
+            
             //resume executa a tarefa
         }.resume()
         //dataTask
-    }
-    func stressFunction(){
-        for i in 1...1000{
-            createProfessor(nome: "Professor\(i)", email: "123\(i)" )
-        }
+        
     }
     
+    func stressFunction(){
+        
+        for i in 1...1000{
+            createProfessor(nome: "Professor \(i)", email: "Email \(i)")
+        }
+    }
 }
