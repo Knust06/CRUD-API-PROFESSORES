@@ -16,14 +16,25 @@ struct AddProfessoresView: View {
     
     
     var body: some View {
-        Form{
+            Form{
                     Section{
-                        TextField("Username", text: $nome)
-                            .textInputAutocapitalization(.never)
-                                .disableAutocorrection(true)
-                        TextField("Email", text: $email)
-                            .textInputAutocapitalization(.never)
-                                .disableAutocorrection(true)
+                        VStack{
+                            Text("Nome")
+                            TextField("Nome", text: $nome)
+                                .textInputAutocapitalization(.never)
+                                    .disableAutocorrection(true)
+                            }
+                        
+                        
+                        
+                        VStack{
+                            Text("Email")
+                            TextField("Email", text: $email)
+                                .textInputAutocapitalization(.never)
+                                    .disableAutocorrection(true)
+                        }
+                            
+                            
                     
                         HStack{
                             Button("Add"){

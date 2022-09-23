@@ -13,23 +13,32 @@ struct EditProfessoresView: View {
     
     @State var nome : String = ""
     @State var email : String = ""
-    
+   //Vai receber o objeto a ser alterado
+    @State var professor : ProfessorModel
     
     var body: some View {
         Form {
             Section {
-                TextField("Nome", text: $nome)
-                    .textInputAutocapitalization(.never)
-                    .disableAutocorrection(true)
-                TextField("Email", text: $email)
-                    .textInputAutocapitalization(.never)
-                    .disableAutocorrection(true)
+                VStack{
+                    Text("Nome")
+                    TextField("Nome", text: $nome)
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
+                }
+                VStack{
+                    Text("Email")
+                    TextField("Email", text: $email)
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
+                }
+                
                     .onAppear(){
-                        
+                        self.nome = professor.nome
+                        self.email = professor.email
                     }
                 HStack{
                     Button("Edit"){ //Como eu faço para colocar o onappear /e o id no update
-                        viewModel.updateProfessores(id: \id , nome: nome , email: email)
+                        viewModel.updateProfessores(id: professor.id , nome: nome , email: email)
                         dismiss()
                     }
                 }

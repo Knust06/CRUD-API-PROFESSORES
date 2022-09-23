@@ -148,7 +148,7 @@ class ViewModel : ObservableObject {
                 if let data = data{
                     // DECODER tranforma um JSON (em geral vem da API) para um objeto swift
                     let result = try JSONDecoder().decode(ProfessorModel.self, from: data)
-                    
+                    self.fetchProfessores()
                     print("UPDATE : \(result.id)")
                 }
             }//do

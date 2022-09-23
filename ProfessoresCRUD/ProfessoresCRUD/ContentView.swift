@@ -14,14 +14,19 @@ struct ContentView: View {
                     /**
                         o parâmetro id é utilizado para saber como identificar unicamente cada objeto. Para isso, ele espera qual atributo do PROFESSORMODEL possa ser utilizado para esta identificação. Então, temos que usar o  \.NOMEDAVARIAVEL.
                      */
-                    ForEach(viewModel.items, id: \.id){ item in
+                    ForEach(viewModel.items.sorted(by: {$0.id>$1.id}), id: \.id){ item in
                         
                         VStack{
-                            Text("\(item.nome)")
-                                .bold()
-                            Text("\(item.email)")
-                                .foregroundColor(.green)
-                                .italic()
+                           // Text("\(item.nome)")
+                               // .bold()
+                           // Text("\(item.email)")
+                               // .foregroundColor(.green)
+                               // .italic()
+                            NavigationLink(destination: EditProfessoresView(professor:item), label:{
+                                Text("\(item.nome)")
+                            })
+                                
+                    
                         }// Vstack
                     }// Foreach
                     .onDelete(perform: deleteProfessores)
@@ -37,9 +42,8 @@ struct ContentView: View {
                                 }//label
                                 
                             }//ToolbarItem
-                            
-        
-                            
+                   
+
                         }//toolbar
                         .sheet(isPresented: $isAddView){
                             AddProfessoresView()
